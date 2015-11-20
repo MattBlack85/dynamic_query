@@ -20,7 +20,7 @@ class CarBaseTest(TestCase):
             for car in car_list
         ]
 
-    def test_max_3_queries(self):
+    def test_max_2_queries(self):
         with self.settings(DEBUG=True):
             from django.db import connection
 
@@ -30,4 +30,4 @@ class CarBaseTest(TestCase):
                                        data=json.dumps(self.payload),
                                        content_type='application/json')
 
-            self.assertEqual(len(connection.queries), 3)
+            self.assertEqual(len(connection.queries), 2)
