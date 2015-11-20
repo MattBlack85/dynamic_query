@@ -9,6 +9,7 @@ from .models import Car
 
 
 def _make_lookup(data):
+    # Creates a list of Q objects, one for each item of the payload
     q_filter = [
         Q(color=item['color'],
           model=item['model'],
@@ -18,12 +19,14 @@ def _make_lookup(data):
     ]
 
     if q_filter:
+        # reducing the iterable to a single value
         return functools.reduce(operator.or_, q_filter)
 
     return q_filter
 
 
 def index(request):
+    # The payload
     data = json.loads(request.body.decode())
 
     q_filter = _make_lookup(data)
